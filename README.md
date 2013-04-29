@@ -164,15 +164,15 @@ These are the variables changed: (From the Italian version; In the English versi
     org.dbpedia.spotlight.spot.spotters = SpotXmlParser
     org.dbpedia.spotlight.spot.dictionary = ../data/spotlight/dbpedia_data/data/spotter.dict
     
-    org.dbpedia.spotlight.spot.cooccurrence.database.connector = jdbc:hsqldb:file:../data/spotlight/dbpedia_data/data/spotsel/ukwac_candidate;shutdown=true&readonly=true
-    org.dbpedia.spotlight.spot.cooccurrence.classifier.unigram = ../data/spotlight/dbpedia_data/data/spotsel/ukwac_unigram.model
-    org.dbpedia.spotlight.spot.cooccurrence.classifier.ngram = ../data/spotlight/dbpedia_data/data/spotsel/ukwac_ngram.model
+	org.dbpedia.spotlight.spot.cooccurrence.database.connector = jdbc:hsqldb:file:../data/spotlight/dbpedia_data/data/spotsel/ukwac_candidate;shutdown=true&readonly=true
+	org.dbpedia.spotlight.spot.cooccurrence.classifier.unigram = ../data/spotlight/dbpedia_data/data/spotsel/ukwac_unigram.model
+	org.dbpedia.spotlight.spot.cooccurrence.classifier.ngram = ../data/spotlight/dbpedia_data/data/spotsel/ukwac_ngram.model
 pedia.spotlight.core.database.connector = jdbc:hsqldb:file:/data/spotlight/database/spotlight-db;shutdown=true&readonly=true
-    org.dbpedia.spotlight.candidateMap.dir = ../data/spotlight/dbpedia_data/data/output/index-withSF-withTypes-compressed
-    org.dbpedia.spotlight.index.dir =/data/spotlight/dbpedia_data/data/output/index-withSF-withTypes-compressed
-    org.dbpedia.spotlight.lucene.analyzer = org.apache.lucene.analysis.en.EnglishAnalyzer
-    org.dbpedia.spotlight.sparql.endpoint = http://dbpedia.org/sparql
-    org.dbpedia.spotlight.sparql.graph = http://dbpedia.org
+	org.dbpedia.spotlight.candidateMap.dir = ../data/spotlight/dbpedia_data/data/output/index-withSF-withTypes-compressed
+	org.dbpedia.spotlight.index.dir =/data/spotlight/dbpedia_data/data/output/index-withSF-withTypes-compressed
+	org.dbpedia.spotlight.lucene.analyzer = org.apache.lucene.analysis.en.EnglishAnalyzer
+	org.dbpedia.spotlight.sparql.endpoint = http://dbpedia.org/sparql
+	org.dbpedia.spotlight.sparql.graph = http://dbpedia.org
 
 The server properties file does not need all the variables. In order to obtain a faster response time, the [`./dbpedia-spotlight/conf/server_jar.properties`]() is provided. It contains just the necessary variables to run the server. Thus, the necessary variables are the ones related with SPOTTING, DISAMBIGUATION, and LINKING
 
