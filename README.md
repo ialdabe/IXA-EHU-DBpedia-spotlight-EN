@@ -217,9 +217,10 @@ For more info: https://github.com/dbpedia-spotlight/dbpedia-spotlight/wiki/Spott
 If the NER has to be done again, the server.properties file needs to be used and change the org.dbpedia.spotlight.spot.spotters variable to "NESpotter WikiMarkupSpotter" 
 
 In this case, it is necessary to compile/install the spotlight with the file versions provided with this distribution:
-	- core/src/main/java/org/dbpedia/spotlight/spot/NESpotter.java
-	- core/src/main/java/org/dbpedia/spotlight/model/SpotterConfiguration.java
-	- core/src/main/java/org/dbpedia/spotlight/spot/OpenNLPUtil.java
+
+	* core/src/main/java/org/dbpedia/spotlight/spot/NESpotter.java
+	* core/src/main/java/org/dbpedia/spotlight/model/SpotterConfiguration.java
+	* core/src/main/java/org/dbpedia/spotlight/spot/OpenNLPUtil.java
 
 This change in the code allows the use of one single model (the one from OpeNER) for NER. This new option is represented by means of:
 org.dbepdia.spotlight.spot.opennlp.ner = http://dbpedia.org/ontology in the server.properties file
@@ -323,6 +324,9 @@ Finally, load the page http://your-server-ip/demo and test the system.
 The index step generates lots of information that is not necessary to run the server. Once all the indexing steps are done, it is possible to keep just the following information:
 - pos-en-general-brown.HiddenMarkovModel (it is not used, but it is necessary because of the configuration)
 - index-withSF-withTypes-compressed: this directory contains the necessary information to disambiguate the entities
+- server_jar.properties or server.properties
+- spotter.dict (it is not used but sometimes is necessary due to configuration issues)
+
 It is a good idea to create a jar file with all the dependencies once the server is ready to be used. To do so, go to the dist directory and type:
 mvn package
 
