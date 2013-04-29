@@ -174,18 +174,18 @@ pedia.spotlight.core.database.connector = jdbc:hsqldb:file:/data/spotlight/datab
     org.dbpedia.spotlight.sparql.endpoint = http://dbpedia.org/sparql
     org.dbpedia.spotlight.sparql.graph = http://dbpedia.org
 
-The server properties file does not need all the variables. In order to obtain a faster response time, the [`./dbpedia-spotlight/conf/server_jar.properties`]() is provided. It contains just the necessary variables to run the server. Thus, the necessary variable are the ones related with SPOTTING, DISAMBIGUATION, and LINKING
+The server properties file does not need all the variables. In order to obtain a faster response time, the [`./dbpedia-spotlight/conf/server_jar.properties`]() is provided. It contains just the necessary variables to run the server. Thus, the necessary variables are the ones related with SPOTTING, DISAMBIGUATION, and LINKING
 
 The SpotXmlParser option considers as input a text and a list of already detected named entities. This is the option to be used.
 
-For more info:https://github.com/dbpedia-spotlight/dbpedia-spotlight/wiki/Spotting
+For more info: https://github.com/dbpedia-spotlight/dbpedia-spotlight/wiki/Spotting
 
 If the NER has to be done again, the server.properties file needs to be used and change the org.dbpedia.spotlight.spot.spotters variable to "NESpotter WikiMarkupSpotter" 
 
 In this case, it is necessary to compile/install the spotlight with the file versions provided with this distribution:
-core/src/main/java/org/dbpedia/spotlight/spot/NESpotter.java
-core/src/main/java/org/dbpedia/spotlight/model/SpotterConfiguration.java
-core/src/main/java/org/dbpedia/spotlight/spot/OpenNLPUtil.java
+	core/src/main/java/org/dbpedia/spotlight/spot/NESpotter.java
+	core/src/main/java/org/dbpedia/spotlight/model/SpotterConfiguration.java
+	core/src/main/java/org/dbpedia/spotlight/spot/OpenNLPUtil.java
 
 This change in the code allows the use of one single model (the one from OpeNER) for NER. This new option is represented by means of:
 org.dbepdia.spotlight.spot.opennlp.ner = http://dbpedia.org/ontology in the server.properties file
@@ -255,13 +255,15 @@ It is possible to use the DBpedia Spotlight Web Service based on the WADL (Web A
 		                        + "&text" + text
 
 The new disambiguation type requires other type of input:
-<annotation text="Brazilian oil giant Petrobras and U.S. oilfield service company Halliburton have signed a technological cooperation agreement, Petrobras announced Monday. The two companies agreed on three projects: studies on contamination of fluids in oil wells, laboratory simulation of well production, and research on solidification of salt and carbon dioxide formations, said Petrobras. Twelve other projects are still under negotiation.">
-<surfaceForm name="oil" offset="10"/>
-<surfaceForm name="company" offset="56"/>
-<surfaceForm name="Halliburton" offset="64"/>
-<surfaceForm name="oil" offset="237"/>
-<surfaceForm name="other" offset="383"/>
-</annotation>
+
+	<annotation text="Brazilian oil giant Petrobras and U.S. oilfield service company Halliburton have signed a technological cooperation agreement, Petrobras announced Monday. The two companies agreed on three projects: studies on contamination of fluids in oil wells, laboratory simulation of well production, and research on solidification of salt and carbon dioxide formations, said Petrobras. Twelve other projects are still under negotiation.">
+	<surfaceForm name="oil" offset="10"/>
+	<surfaceForm name="company" offset="56"/>
+	<surfaceForm name="Halliburton" offset="64"/>
+	<surfaceForm name="oil" offset="237"/>
+	<surfaceForm name="other" offset="383"/>
+	</annotation>
+
 
 ### 7. Setting-up and running the web-based interface
 
