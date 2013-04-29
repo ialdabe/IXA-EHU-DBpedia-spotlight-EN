@@ -153,28 +153,62 @@ Consider then [`./dbpedia-spotlight/conf/server.properties`](), set the variable
 
 These are the variables changed: (From the Italian version; In the English version all variables have relative paths)
 
+
+
     org.dbpedia.spotlight.web.rest.uri = http://localhost:2020/rest
     org.dbpedia.spotlight.default_namespace = http://dbpedia.org/resource/
     org.dbpedia.spotlight.default_ontology= http://dbpedia.org/ontology/
     
-    org.dbpedia.spotlight.language = Englsih
+    org.dbpedia.spotlight.language = English
     org.dbpedia.spotlight.language_i18n_code = en
     
-    org.dbpedia.spotlight.data.stopWords.english = ../data/spotlight/dbpedia_data/data/stopwords.it.list
+    org.dbpedia.spotlight.data.stopWords.english = /data/spotlight/dbpedia_data/data/stopwords.en.list
     org.dbpedia.spotlight.spot.spotters = SpotXmlParser
     org.dbpedia.spotlight.spot.dictionary = ../data/spotlight/dbpedia_data/data/spotter.dict
     
-	org.dbpedia.spotlight.spot.cooccurrence.database.connector = jdbc:hsqldb:file:../data/spotlight/dbpedia_data/data/spotsel/ukwac_candidate;shutdown=true&readonly=true
-	org.dbpedia.spotlight.spot.cooccurrence.classifier.unigram = ../data/spotlight/dbpedia_data/data/spotsel/ukwac_unigram.model
-	org.dbpedia.spotlight.spot.cooccurrence.classifier.ngram = ../data/spotlight/dbpedia_data/data/spotsel/ukwac_ngram.model
-pedia.spotlight.core.database.connector = jdbc:hsqldb:file:/data/spotlight/database/spotlight-db;shutdown=true&readonly=true
-	org.dbpedia.spotlight.candidateMap.dir = ../data/spotlight/dbpedia_data/data/output/index-withSF-withTypes-compressed
-	org.dbpedia.spotlight.index.dir =/data/spotlight/dbpedia_data/data/output/index-withSF-withTypes-compressed
-	org.dbpedia.spotlight.lucene.analyzer = org.apache.lucene.analysis.en.EnglishAnalyzer
+    org.dbpedia.spotlight.spot.cooccurrence.database.connector = jdbc:hsqldb:file:../data/spotlight/dbpedia_data/data/spotsel/ukwac_candidate;shutdown=true&readonly=true
+    org.dbpedia.spotlight.spot.cooccurrence.classifier.unigram = ../data/spotlight/dbpedia_data/data/spotsel/ukwac_unigram.model
+    org.dbpedia.spotlight.spot.cooccurrence.classifier.ngram = ../data/spotlight/dbpedia_data/data/spotsel/ukwac_ngram.model
+    org.dbpedia.spotlight.tagging.hmm = ../data/spotlight/dbpedia_data/data/pos-en-general-brown.HiddenMarkovModel
+    
+    org.dbpedia.spotlight.spot.opennlp.dir = ../data/spotlight/dbpedia_data/data/opennlp
+    org.dbpedia.spotlight.spot.opennlp.person= http://dbpedia.org/ontology/Person
+    org.dbpedia.spotlight.spot.opennlp.organization=http://dbpedia.org/ontology/Organisation
+    org.dbpedia.spotlight.spot.opennlp.location=http://dbpedia.org/ontology/Place
+    
+    org.dbpedia.spotlight.core.database.connector = jdbc:hsqldb:file:../data/spotlight/database/spotlight-db;shutdown=true&readonly=true
+    org.dbpedia.spotlight.candidateMap.dir = ../data/spotlight/dbpedia_data/data/output/index-withSF-withTypes-compressed
+    org.dbpedia.spotlight.index.dir =../data/spotlight/dbpedia_data/data/output/index-withSF-withTypes-compressed
+    org.dbpedia.spotlight.lucene.analyzer = org.apache.lucene.analysis.en.EnglishAnalyzer
+    org.dbpedia.spotlight.sparql.endpoint = http://dbpedia.org/sparql
+    org.dbpedia.spotlight.sparql.graph = http://dbpedia.org
+
+
+
+
+The server properties file does not need all the variables. In order to obtain a faster response time, the [`./dbpedia-spotlight/conf/server_jar.properties`]() is provided. It contains just the necessary variables to run the server. Thus, the necessary variables are the ones related with SPOTTING, DISAMBIGUATION, and LINKING
+
+	org.dbpedia.spotlight.web.rest.uri = http://localhost:2020/rest
+	org.dbpedia.spotlight.default_namespace = http://dbpedia.org/resource/
+	org.dbpedia.spotlight.default_ontology= http://dbpedia.org/ontology/
+	org.dbpedia.spotlight.language = English
+	org.dbpedia.spotlight.language_i18n_code = en
+	org.dbpedia.spotlight.data.stopWords.english = ../data/spotlight/dbpedia_data/data/stopwords.en.list
+
+	org.dbpedia.spotlight.spot.spotters = SpotXmlParser
+
+	org.dbpedia.spotlight.tagging.hmm = ../data/spotlight/dbpedia_data/data/pos-en-general-brown.HiddenMarkovModel
+
+	org.dbpedia.spotlight.disambiguate.disambiguators = Default,Document
+
+	org.dbpedia.spotlight.index.dir =../data/spotlight/dbpedia_data/data/output/index-withSF-withTypes-compressed
+	org.dbpedia.spotlight.index.loadToMemory = false
+	jcs.default.cacheattributes.MaxObjects = 5000
+
+
 	org.dbpedia.spotlight.sparql.endpoint = http://dbpedia.org/sparql
 	org.dbpedia.spotlight.sparql.graph = http://dbpedia.org
 
-The server properties file does not need all the variables. In order to obtain a faster response time, the [`./dbpedia-spotlight/conf/server_jar.properties`]() is provided. It contains just the necessary variables to run the server. Thus, the necessary variables are the ones related with SPOTTING, DISAMBIGUATION, and LINKING
 
 The SpotXmlParser option considers as input a text and a list of already detected named entities. This is the option to be used.
 
@@ -183,9 +217,9 @@ For more info: https://github.com/dbpedia-spotlight/dbpedia-spotlight/wiki/Spott
 If the NER has to be done again, the server.properties file needs to be used and change the org.dbpedia.spotlight.spot.spotters variable to "NESpotter WikiMarkupSpotter" 
 
 In this case, it is necessary to compile/install the spotlight with the file versions provided with this distribution:
-	core/src/main/java/org/dbpedia/spotlight/spot/NESpotter.java
-	core/src/main/java/org/dbpedia/spotlight/model/SpotterConfiguration.java
-	core/src/main/java/org/dbpedia/spotlight/spot/OpenNLPUtil.java
+	- core/src/main/java/org/dbpedia/spotlight/spot/NESpotter.java
+	- core/src/main/java/org/dbpedia/spotlight/model/SpotterConfiguration.java
+	- core/src/main/java/org/dbpedia/spotlight/spot/OpenNLPUtil.java
 
 This change in the code allows the use of one single model (the one from OpeNER) for NER. This new option is represented by means of:
 org.dbepdia.spotlight.spot.opennlp.ner = http://dbpedia.org/ontology in the server.properties file
